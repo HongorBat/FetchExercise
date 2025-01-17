@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FetchCodingExerciseTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-
+                    FetchCodingExerciseApp()
                 }
             }
         }
