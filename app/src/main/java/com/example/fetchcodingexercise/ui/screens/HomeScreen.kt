@@ -17,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fetchcodingexercise.R
@@ -45,18 +47,24 @@ fun HomeScreen(
         }
         is AppUiState.Success -> {
 
-            var expanded by remember { mutableStateOf(false) }
+            //Show empty screen if response is empty
+            if (uiState.response.isEmpty()){
+                EmptyScreen(modifier = Modifier.fillMaxSize())
+            } else {
+                var expanded by remember { mutableStateOf(false) }
 
-            var selectedListId by remember { mutableStateOf<Int?>(null) }
+                var selectedListId by remember { mutableStateOf<Int?>(null) }
 
-            ListItemScreen(
-                listItems = uiState.response,
-                selectedListId = selectedListId,
-                expanded = expanded,
-                onExpandedChanged = { expanded = !expanded },
-                onListIdChanged = { selectedListId = it; expanded = !expanded },
-                modifier = modifier.fillMaxSize(),
-                contentPadding = contentPaddingValues)
+                ListItemScreen(
+                    listItems = uiState.response,
+                    selectedListId = selectedListId,
+                    expanded = expanded,
+                    onExpandedChanged = { expanded = !expanded },
+                    onListIdChanged = { selectedListId = it; expanded = !expanded },
+                    modifier = modifier.fillMaxSize(),
+                    contentPadding = contentPaddingValues)
+            }
+
         }
         is AppUiState.Error -> {
             ErrorScreen(modifier = Modifier.fillMaxSize())
@@ -140,6 +148,19 @@ fun ListItemCard(singleItem: SingleItem, modifier: Modifier = Modifier){
     }
 }
 
+@Composable
+fun EmptyScreen(modifier: Modifier = Modifier){
+    Column(modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = "Empty Response",
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.displayLarge
+        )
+    }
+}
+
 // show loading screen when network request is not finished
 @Composable
 fun LoadingScreen(modifier: Modifier = Modifier){
@@ -169,6 +190,7 @@ fun ErrorScreen(modifier: Modifier = Modifier){
 @Preview(showSystemUi = true)
 fun ListItemScreenPreview(){
     FetchCodingExerciseTheme {
+        EmptyScreen(modifier =  Modifier.fillMaxSize())
     }
 }
 
