@@ -32,6 +32,7 @@ fun FetchCodingExerciseApp(){
             val exerciseViewModel : ExerciseViewModel = viewModel()
             HomeScreen(
                 uiState = exerciseViewModel.uiState,
+                retryAction = exerciseViewModel::getListItems,
                 contentPaddingValues = it)
         }
     }

@@ -38,6 +38,7 @@ import com.example.fetchcodingexercise.ui.theme.FetchCodingExerciseTheme
 @Composable
 fun HomeScreen(
     uiState: AppUiState,
+    retryAction : () -> Unit,
     modifier: Modifier = Modifier,
     contentPaddingValues: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -67,7 +68,7 @@ fun HomeScreen(
 
         }
         is AppUiState.Error -> {
-            ErrorScreen(modifier = Modifier.fillMaxSize())
+            ErrorScreen(retryAction = retryAction, modifier = Modifier.fillMaxSize())
         }
     }
 }
@@ -173,7 +174,7 @@ fun LoadingScreen(modifier: Modifier = Modifier){
 
 // show error screen if there and issue e.g no internet connection
 @Composable
-fun ErrorScreen(modifier: Modifier = Modifier){
+fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier = Modifier){
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -183,6 +184,9 @@ fun ErrorScreen(modifier: Modifier = Modifier){
             painter = painterResource(R.drawable.no_connection), contentDescription = null, modifier = Modifier.size(200.dp)
         )
         Text( text =  stringResource(R.string.loading_failed), modifier = Modifier.padding(16.dp))
+        Button(onClick = retryAction) {
+            Text(text = stringResource(R.string.retry))
+        }
     }
 }
 

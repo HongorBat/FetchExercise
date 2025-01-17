@@ -7,5 +7,6 @@
     <string name="list_id_label">List ID: %1$d</string>
     <string name="id_label">ID: %1$d</string>
     <string name="name_label">Name: %1$s</string>
+    <string name="retry">Retry</string>
 
 </resources>

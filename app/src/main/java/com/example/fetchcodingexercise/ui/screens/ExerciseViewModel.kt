@@ -34,7 +34,9 @@ class ExerciseViewModel @Inject constructor(
     }
 
     // get list items from the api
-    private fun getListItems() {
+    fun getListItems() {
+        if (uiState is AppUiState.Error)
+            uiState = AppUiState.Loading
         viewModelScope.launch {
             uiState = try {
                 AppUiState.Success(repository.getListItems())
