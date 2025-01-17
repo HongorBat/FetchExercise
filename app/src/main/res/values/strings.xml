@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Fetch Coding Exercise</string>
+
+    <string name="loading">Loading</string>
+    <string name="loading_failed">Failed to load</string>
+
 </resources>

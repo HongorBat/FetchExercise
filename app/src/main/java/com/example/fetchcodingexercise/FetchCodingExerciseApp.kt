@@ -14,6 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.fetchcodingexercise.ui.screens.ExerciseViewModel
 import com.example.fetchcodingexercise.ui.screens.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,7 +29,10 @@ fun FetchCodingExerciseApp(){
         topBar = { TopBar(scrollBehavior = scrollBehavior) }
     ) {
         Surface(modifier = Modifier.fillMaxSize()) {
-            HomeScreen(contentPaddingValues = it)
+            val exerciseViewModel : ExerciseViewModel = viewModel()
+            HomeScreen(
+                uiState = exerciseViewModel.uiState,
+                contentPaddingValues = it)
         }
     }
 
