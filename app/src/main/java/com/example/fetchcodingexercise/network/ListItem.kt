@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 // List Item returned on the response
 @Serializable
 data class ListItem(
-    val id : String,
-    val listId : String,
+    val id : Int,
+    val listId : Int,
     val name : String?
 )
