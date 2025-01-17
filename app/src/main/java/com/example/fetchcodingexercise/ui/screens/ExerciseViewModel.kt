@@ -15,7 +15,7 @@ import javax.inject.Inject
 // Different states of the ui depending on the network call success
 sealed interface AppUiState{
     object Loading : AppUiState
-    data class Success(val response : List<SingleItem>) : AppUiState
+    data class Success(val response : Map<Int, List<SingleItem>>) : AppUiState
     object Error : AppUiState
 }
 
