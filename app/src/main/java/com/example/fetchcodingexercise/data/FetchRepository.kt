@@ -13,6 +13,12 @@ class NetworkFetchRepository(
     private val apiService: FetchApiService
 ) :FetchRepository {
     override suspend fun getListItems(): List<SingleItem> {
-        return apiService.getListItem()
+        return apiService.getListItem().filter {
+            !it.name.isNullOrBlank() // filter out all the items where name is null or blank
+        }.sortedWith(compareBy<SingleItem> {
+            it.listId // sort by listId first
+        }.thenBy {
+            it.name // sort by name
+        })
     }
 }

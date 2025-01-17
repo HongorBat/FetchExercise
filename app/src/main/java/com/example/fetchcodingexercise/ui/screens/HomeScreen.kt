@@ -61,10 +61,13 @@ fun ListItemCard(singleItem: SingleItem, modifier: Modifier = Modifier){
             modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally)
         ) {
             Text(
+                text = "listId : ${singleItem.listId}"
+            )
+            Text(
                 text = "ID : ${singleItem.id}"
             )
             Text(
-                text = "listId : ${singleItem.listId}"
+                text = "name : ${singleItem.name}"
             )
         }
     }
