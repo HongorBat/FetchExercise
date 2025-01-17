@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fetchcodingexercise.data.FetchRepository
-import com.example.fetchcodingexercise.network.ListItem
+import com.example.fetchcodingexercise.network.SingleItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -15,7 +15,7 @@ import javax.inject.Inject
 // Different states of the ui depending on the network call success
 sealed interface AppUiState{
     object Loading : AppUiState
-    data class Success(val response : List<ListItem>) : AppUiState
+    data class Success(val response : List<SingleItem>) : AppUiState
     object Error : AppUiState
 }
 
